@@ -4,6 +4,10 @@
   left: 0;
   width: 100%;
   min-height: 100vh;
+  background-position: center;
+  background-repeat: no-repeat;
+  background-size: cover;
+  background-image: url(/public/map.png);
 }
 
 .marker {
