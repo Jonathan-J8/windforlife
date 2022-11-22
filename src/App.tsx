@@ -1,12 +1,15 @@
 import Navbar from './components/Navbar';
 import Map from './components/Map';
+import Marker from './components/Marker';
 
 function App() {
   return (
     <>
       <Navbar />
       <main>
-        <Map></Map>
+        <Map>
+          <Marker />
+        </Map>
       </main>
     </>
   );

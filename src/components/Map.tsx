@@ -1,4 +1,4 @@
-import { memo, PropsWithChildren } from 'react';
+import { memo, type PropsWithChildren } from 'react';
 import type { LeafletMouseEvent, Map as LeafletMap } from 'leaflet';
 import { MapContainer, TileLayer, type MapContainerProps } from 'react-leaflet';
 
@@ -35,12 +35,6 @@ const Map = memo(
           url="https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png"
         />
         {children}
-        {/* <Marker position={[21.663522, -158.052865]}>
-          <Popup>
-            A pretty CSS3 popup. <br /> Easily customizable.
-          </Popup>
-          
-        </Marker> */}
       </MapContainer>
     );
   }
