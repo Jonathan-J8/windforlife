@@ -2,17 +2,20 @@ import { Close } from '@mui/icons-material';
 import { Box, Button, Divider, Fab, Grow, Modal, Paper, Typography } from '@mui/material';
 import { useAnemometerAction, useAnemometerState, AnemometerAction } from '../anemometer/store';
 
-const MarkerDetail = () => {
-  const anemometer = useAnemometerState();
-  const dispatch = useAnemometerAction();
+const getDetailSafely = (obj: AnemometerDetail) => ({
+  name: obj?.name || '',
+  lat: obj?.loc?.lat || 0,
+  long: obj?.loc?.long || 0,
+  weeklyForce: obj?.statistics?.average?.weekly?.force || '',
+  dailyForce: obj?.statistics?.average?.daily?.force || '',
+});
 
-  const onClose = () => dispatch({ type: AnemometerAction.REMOVE });
-  const show = anemometer ? true : false;
-  const name = anemometer?.name;
-  const lat = anemometer?.loc?.lat;
-  const long = anemometer?.loc?.long;
-  const weeklyForce = anemometer?.statistics?.average?.weekly?.force || '';
-  const dailyForce = anemometer?.statistics?.average?.daily?.force || '';
+const MarkerDetail = () => {
+  const dispatch = useAnemometerAction();
+  const { show, anemometer } = useAnemometerState();
+
+  const onClose = () => dispatch({ type: AnemometerAction.HIDE });
+  const { name, lat, long, weeklyForce, dailyForce } = getDetailSafely(anemometer);
 
   return (
     <Grow in={show} style={{ transformOrigin: '0 0 0' }}>

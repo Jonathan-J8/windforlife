@@ -3,7 +3,7 @@ import { Marker as MarkerLeafet, Popup } from 'react-leaflet';
 
 import useFetch from '../utils/useFetch';
 import { anemometerById } from '../anemometer/api';
-import { useAnemometerAction } from '../anemometer/store';
+import { useAnemometerAction, AnemometerAction } from '../anemometer/store';
 
 type MarkerProps = {
   lat: number;
@@ -17,10 +17,15 @@ type MarkerProps = {
 
 const Marker = ({ id, label, lat, long }: MarkerProps) => {
   const dispatch = useAnemometerAction();
-
   const res = useFetch(anemometerById(id));
 
   console.log('anemo', id);
+  const onClick = () => {
+    if (res.state === 'fullfilled' && res.type === 'object') {
+      const anemometer = res.data as AnemometerDetail;
+      dispatch({ type: AnemometerAction.ADD, payload: { show: true, anemometer } });
+    }
+  };
 
   return (
     <>
@@ -31,11 +36,7 @@ const Marker = ({ id, label, lat, long }: MarkerProps) => {
         position={[lat, long]}
         // icon={new DivIcon({ iconUrl: '/navigation_FILL1_wght700_GRAD0_opsz48.png', html: icon.current })}
         eventHandlers={{
-          click: () => {
-            console.log('marker clicked');
-            // add(res.data);
-            dispatch({ type: 'add', payload: res.data });
-          },
+          click: onClick,
         }}>
         <Popup>{label}</Popup>
         <Navigation />
