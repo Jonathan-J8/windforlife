@@ -1,0 +1,26 @@
+[
+  {
+    "id": 1,
+    "name": "North Shore Oahu - Pipeline",
+    "loc": {
+      "lat": 21.663522,
+      "long": -158.052865
+    }
+  },
+  {
+    "id": 2,
+    "name": "North Shore Maui - Jaws",
+    "loc": {
+      "lat": 20.942666,
+      "long": -156.295802
+    }
+  },
+  {
+    "id": 3,
+    "name": "South East Shore Oahu - Sandy Beach",
+    "loc": {
+      "lat": 21.286056,
+      "long": -157.670215
+    }
+  }
+]

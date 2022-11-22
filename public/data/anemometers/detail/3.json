@@ -1,0 +1,46 @@
+{
+    "id": 3,
+    "name": "South East Shore Oahu - Sandy Beach",
+    "loc": {
+        "lat": 21.286056,
+        "long": -157.670215
+    },
+    "statistics": {
+        "average": {
+            "daily": { "force": 13.39 },
+            "weekly": { "force": 15.95 }
+        }
+    },
+    "readings": [
+        {
+            "timestamp": "2021-12-30T12:12:06+0000",
+            "force": 9.10,
+            "dir": 239
+        },
+        {
+            "timestamp": "2021-12-01T12:12:44+0000",
+            "force": 13.07,
+            "dir": 288
+        },
+        {
+            "timestamp": "2021-12-02T14:14:53+0000",
+            "force": 12.12,
+            "dir": 209
+        },
+        {
+            "timestamp": "2021-12-03T13:37:12+0000",
+            "force": 10.81,
+            "dir": 214
+        },
+        {
+            "timestamp": "2021-12-04T00:27:10+0000",
+            "force": 10.13,
+            "dir": 260
+        },
+        {
+            "timestamp": "2021-12-05T22:50:52+0000",
+            "force": 12.65,
+            "dir": 274
+        }
+    ]
+}

@@ -1,0 +1,46 @@
+{
+    "id": 1,
+    "name": "North Shore Maui - Jaws",
+    "loc": {
+        "lat": 21.663522,
+        "long": -158.052865
+    },
+    "statistics": {
+        "average": {
+            "daily": { "force": 17.07 },
+            "weekly": { "force": 15.56 }
+        }
+    },
+    "readings": [
+        {
+            "timestamp": "2021-12-29T21:49:04+0000",
+            "force": 12.30,
+            "dir": 61
+        },
+        {
+            "timestamp": "2021-12-30T07:54:56+0000",
+            "force": 16.68,
+            "dir": 64
+        },
+        {
+            "timestamp": "2021-12-01T09:50:36+0000",
+            "force": 19.57,
+            "dir": 59
+        },
+        {
+            "timestamp": "2021-12-02T04:30:23+0000",
+            "force": 18.54,
+            "dir": 67
+        },
+        {
+            "timestamp": "2021-12-04T05:15:27+0000",
+            "force": 18.00,
+            "dir": 52
+        },
+        {
+            "timestamp": "2021-12-05T10:31:18+0000",
+            "force": 20.06,
+            "dir": 60
+        }
+    ]
+}

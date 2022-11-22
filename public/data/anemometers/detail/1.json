@@ -1,0 +1,51 @@
+{
+    "id": 1,
+    "name": "North Shore Oahu - Pipeline",
+    "loc": {
+        "lat": 21.663522,
+        "long": -158.052865
+    },
+    "statistics": {
+        "average": {
+            "daily": { "force": 18.07 },
+            "weekly": { "force": 13.99 }
+        }
+    },
+    "readings": [
+        {
+            "timestamp": "2021-12-29T09:30:06+0000",
+            "force": 14.05,
+            "dir": 92
+        },
+        {
+            "timestamp": "2021-12-30T15:24:15+0000",
+            "force": 19.87,
+            "dir": 94
+        },
+        {
+            "timestamp": "2021-12-01T12:00:33+0000",
+            "force": 17.69,
+            "dir": 75
+        },
+        {
+            "timestamp": "2021-12-02T08:12:45+0000",
+            "force": 14.56,
+            "dir": 84
+        },
+        {
+            "timestamp": "2021-12-03T06:49:35+0000",
+            "force": 18.63,
+            "dir": 22
+        },
+        {
+            "timestamp": "2021-12-04T01:32:56+0000",
+            "force": 20.85,
+            "dir": 56
+        },
+        {
+            "timestamp": "2021-12-05T05:55:12+0000",
+            "force": 19.04,
+            "dir": 38
+        }
+    ]
+}
