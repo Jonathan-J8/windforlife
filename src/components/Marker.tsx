@@ -1,11 +1,9 @@
-import { useState } from 'react';
-import { Place } from '@mui/icons-material';
-import MarkerDetail from './MarkerDetail';
+import { Navigation, Place } from '@mui/icons-material';
 import { Marker as MarkerLeafet, Popup } from 'react-leaflet';
 
-import style from './style.module.css';
 import useFetch from '../utils/useFetch';
-import { anemometerById } from '../api';
+import { anemometerById } from '../anemometer/api';
+import { useAnemometerAction } from '../anemometer/store';
 
 type MarkerProps = {
   lat: number;
@@ -14,24 +12,35 @@ type MarkerProps = {
   id: number;
 };
 
+// d: "M12 2 4.5 20.29l.71.71L12 18l6.79 3 .71-.71z"
+// icon={{ imagePath: '/navigation_FILL1_wght700_GRAD0_opsz48' }}
+
 const Marker = ({ id, label, lat, long }: MarkerProps) => {
-  const [open, setOpen] = useState(false);
+  const dispatch = useAnemometerAction();
 
   const res = useFetch(anemometerById(id));
 
-  const onOpen = () => setOpen(true);
-  const onClose = () => {
-    setOpen(false);
-  };
+  console.log('anemo', id);
+
   return (
-    <MarkerLeafet position={[lat, long]}>
-      <Popup>{label}</Popup>
-    </MarkerLeafet>
-    // <span onClick={onOpen} className={style.marker} style={{ translate: `${x}% ${y}%` }}>
-    //   <Place />
-    // </span>
-    // <MarkerDetail open={open} onClose={onClose} />
-    // </>
+    <>
+      {/* <div ref={icon}>
+        <img src="/navigation_FILL1_wght700_GRAD0_opsz48.png" />
+      </div> */}
+      <MarkerLeafet
+        position={[lat, long]}
+        // icon={new DivIcon({ iconUrl: '/navigation_FILL1_wght700_GRAD0_opsz48.png', html: icon.current })}
+        eventHandlers={{
+          click: () => {
+            console.log('marker clicked');
+            // add(res.data);
+            dispatch({ type: 'add', payload: res.data });
+          },
+        }}>
+        <Popup>{label}</Popup>
+        <Navigation />
+      </MarkerLeafet>
+    </>
   );
 };
 

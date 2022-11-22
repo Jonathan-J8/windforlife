@@ -1,5 +1,6 @@
 import { useEffect, useState } from 'react';
 import typeOf from './typeOf';
+import wait from './wait';
 
 export type FetchResult = {
   data: any;
@@ -17,6 +18,7 @@ const useFetch = (url: string, options?: RequestInit | undefined): FetchResult =
     setResult({ ...defaultResult, state: 'pending' });
 
     (async () => {
+      await wait(500);
       try {
         const res = await fetch(url, { ...options, signal: controller.signal });
         const json = await res.json();
