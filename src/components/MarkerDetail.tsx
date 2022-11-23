@@ -42,8 +42,8 @@ const MarkerDetail = () => {
           </li>
           <MarkerDetailInfo primary="Latitude" secondary={lat} />
           <MarkerDetailInfo primary="Longitude" secondary={long} />
-          <MarkerDetailInfo primary="Weekly force average" secondary={weeklyForce} />
-          <MarkerDetailInfo primary="Daily force average" secondary={dailyForce} />
+          <MarkerDetailInfo primary="Weekly average" secondary={`${weeklyForce} kn`} />
+          <MarkerDetailInfo primary="Daily average" secondary={`${dailyForce} kn`} />
           <li>
             <Divider />
           </li>

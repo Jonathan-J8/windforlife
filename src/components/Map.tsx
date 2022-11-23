@@ -1,7 +1,7 @@
 import { memo, type PropsWithChildren } from 'react';
 import { MapContainer, TileLayer, type MapContainerProps } from 'react-leaflet';
-import type { LeafletMouseEvent, Map as LeafletMap } from 'leaflet';
-import useRefWithCallback from '../utils/useRefWithCallback';
+// import type { LeafletMouseEvent, Map as LeafletMap } from 'leaflet';
+// import useRefWithCallback from '../utils/useRefWithCallback';
 
 interface MapProps extends MapContainerProps, PropsWithChildren {}
 
@@ -13,19 +13,19 @@ const Map = ({
   zoomControl = false,
   ...rest
 }: MapProps) => {
-  const setRef = useRefWithCallback((map: LeafletMap | undefined) => {
-    const onCLick = (e: LeafletMouseEvent) => {
-      const map = e.target;
-      console.log(map.getCenter());
-    };
-    if (map) map.on('click', onCLick);
-    return () => {
-      if (map) map.off('click', onCLick);
-    };
-  });
+  // for debugging
+  // const setRef = useRefWithCallback((map: LeafletMap | undefined) => {
+  //   const onCLick = (e: LeafletMouseEvent) => {
+  //     const map = e.target;
+  //   };
+  //   if (map) map.on('click', onCLick);
+  //   return () => {
+  //     if (map) map.off('click', onCLick);
+  //   };
+  // });
   return (
     <MapContainer
-      ref={setRef}
+      // ref={setRef}
       center={center}
       zoom={zoom}
       scrollWheelZoom={scrollWheelZoom}
