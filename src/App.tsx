@@ -16,8 +16,7 @@ function App() {
       <main>
         <MarkerProvider>
           <Map>
-            {markers.state === 'fullfilled' &&
-              markers.data?.length > 0 &&
+            {Array.isArray(markers.data) &&
               markers.data.map((marker: MarkerData) => <Marker key={marker.id} {...marker} />)}
           </Map>
           <MarkerDetail />
