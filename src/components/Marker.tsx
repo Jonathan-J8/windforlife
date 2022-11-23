@@ -1,15 +1,8 @@
-import { Marker as MarkerLeafet, Popup, useMap } from 'react-leaflet';
+import { Marker as MarkerLeafet, useMap } from 'react-leaflet';
 
 import useFetch from '../utils/useFetch';
 import { marker as endpoint } from '../stores/apiEndpoints';
 import { useMarkerAction, MarkerAction } from '../stores/markerContext';
-
-type MarkerProps = {
-  lat: number;
-  long: number;
-  label: string;
-  id: number;
-};
 
 // d: "M12 2 4.5 20.29l.71.71L12 18l6.79 3 .71-.71z"
 // icon={{ imagePath: '/navigation_FILL1_wght700_GRAD0_opsz48' }}

@@ -1,14 +1,14 @@
 import { useCallback, useRef } from 'react';
 
 type Unmount = () => void;
-type Mount = (node: any) => Unmount;
+type Mount = (node: unknown) => Unmount;
 
 const useRefWithCallback = (onMount: Mount) => {
-  const ref = useRef<any>(undefined);
+  const ref = useRef<unknown>(undefined);
   const callback = useRef<Unmount | undefined>(undefined);
 
   const setRef = useCallback(
-    (node: any) => {
+    (node: unknown) => {
       // execute the unmount method if any
       if (typeof callback.current === 'function') callback.current();
 

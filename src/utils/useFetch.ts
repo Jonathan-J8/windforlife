@@ -4,7 +4,7 @@ import wait from './wait';
 import typeOf from './typeOf';
 
 export type FetchResult = {
-  data: any;
+  data: unknown;
   type: string;
   state: 'idle' | 'pending' | 'fullfilled' | 'error';
 };

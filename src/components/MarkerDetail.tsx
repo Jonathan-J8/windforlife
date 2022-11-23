@@ -24,6 +24,7 @@ const MarkerDetail = () => {
   return (
     <Slide in={show} direction={isMobile() ? 'up' : 'right'}>
       <Paper
+        aria-live="assertive"
         className={isMobile() ? style.markerDetailMobile : style.markerDetailDesktop}
         elevation={2}
         sx={{
