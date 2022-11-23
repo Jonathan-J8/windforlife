@@ -3,13 +3,12 @@ import { PropsWithChildren } from 'react';
 import style from './style.module.css';
 
 interface MarkerDetailInfoProps extends PropsWithChildren {
-  primary?: string;
-  secondary?: string;
+  list: MarkerReadingData;
 }
 
-const MarkerDetailInfo = ({ primary, secondary, children }: MarkerDetailInfoProps) => {
+const MarkerDetailInfo = ({ list }: MarkerDetailInfoProps) => {
   return (
-    <li className={style.markerDetailInfo} tabIndex={0}>
+    <li className={style.markerDetailInfo}>
       {children || (
         <>
           <Typography variant="body2" sx={{ flexGrow: 1 }}>

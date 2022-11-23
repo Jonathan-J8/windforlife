@@ -19,16 +19,16 @@ const initialState = {
   },
 };
 
-type State = { show: boolean; anemometer: AnemometerDetail };
+type State = { show: boolean; anemometer: MarkerDetailData };
 type Action = { type: string; payload?: State };
 
 const ContextState = createContext<State>({ ...initialState });
 const ContextAction = createContext<Dispatch<Action>>(() => {});
 
-export const useAnemometerState = () => useContext(ContextState);
-export const useAnemometerAction = () => useContext(ContextAction);
+export const useMarkerState = () => useContext(ContextState);
+export const useMarkerAction = () => useContext(ContextAction);
 
-export enum AnemometerAction {
+export enum MarkerAction {
   ADD = 'add',
   REMOVE = 'remove',
   SHOW = 'show',
@@ -37,22 +37,22 @@ export enum AnemometerAction {
 
 const reducer = (state: State, action: Action): State => {
   switch (action.type) {
-    case AnemometerAction.SHOW:
+    case MarkerAction.SHOW:
       return {
         ...state,
         show: true,
       };
-    case AnemometerAction.HIDE:
+    case MarkerAction.HIDE:
       return {
         ...state,
         show: false,
       };
-    case AnemometerAction.ADD:
+    case MarkerAction.ADD:
       return {
         ...state,
         ...action.payload,
       };
-    case AnemometerAction.REMOVE:
+    case MarkerAction.REMOVE:
       return {
         ...state,
         anemometer: { ...initialState.anemometer },
@@ -62,7 +62,7 @@ const reducer = (state: State, action: Action): State => {
   }
 };
 
-export const AnemometerProvider = ({ children }: PropsWithChildren) => {
+export const MarkerProvider = ({ children }: PropsWithChildren) => {
   const [state, dispatch] = useReducer(reducer, { ...initialState });
 
   return (

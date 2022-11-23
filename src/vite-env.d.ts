@@ -1,6 +1,6 @@
 /// <reference types="vite/client" />
 
-declare interface Anemometer {
+declare interface MarkerData {
   id: number;
   name: string;
   loc: {
@@ -9,18 +9,18 @@ declare interface Anemometer {
   };
 }
 
-type AnemometerReading = {
+type MarkerReadingData = {
   timestamp: Date;
   force: number;
   dir: number;
 };
 
-declare interface AnemometerDetail extends Anemometer {
+declare interface MarkerDetailData extends MarkerData {
   statistics: {
     average: {
       daily: { force: number };
       weekly: { force: number };
     };
   };
-  readings: AnemometerReading[];
+  readings: MarkerReadingData[];
 }

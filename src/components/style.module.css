@@ -29,7 +29,7 @@
   width: clamp(200px, 93%, 340px);
 }
 
-.markerDetailInfoContainer {
+.markerDetailInnerContainer {
   list-style-type: none;
   margin-block-start: 0;
   margin-block-end: 0;

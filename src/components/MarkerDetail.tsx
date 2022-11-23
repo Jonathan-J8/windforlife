@@ -1,24 +1,25 @@
 import { Close } from '@mui/icons-material';
 import { Divider, IconButton, Paper, Slide, Typography } from '@mui/material';
-import { useAnemometerAction, useAnemometerState, AnemometerAction } from '../anemometer/store';
+import { useMarkerAction, useMarkerState, MarkerAction } from '../stores/markerContext';
 import isMobile from '../utils/isMobile';
 import MarkerDetailInfo from './MarkerDetailInfo';
 import style from './style.module.css';
 
-const getDetailSafely = (obj?: AnemometerDetail) => ({
+const getDetailSafely = (obj?: MarkerDetailData) => ({
   name: obj?.name || '',
   lat: `${obj?.loc?.lat}` || '',
   long: `${obj?.loc?.long}` || '',
   weeklyForce: `${obj?.statistics?.average?.weekly?.force}` || '',
   dailyForce: `${obj?.statistics?.average?.daily?.force}` || '',
+  readings: obj?.readings || [],
 });
 
 const MarkerDetail = () => {
-  const { show, anemometer } = useAnemometerState();
+  const { show, anemometer } = useMarkerState();
   const { name, lat, long, weeklyForce, dailyForce } = getDetailSafely(anemometer);
 
-  const dispatch = useAnemometerAction();
-  const onClose = () => dispatch({ type: AnemometerAction.HIDE });
+  const dispatch = useMarkerAction();
+  const onClose = () => dispatch({ type: MarkerAction.HIDE });
 
   return (
     <Slide in={show} direction={isMobile() ? 'up' : 'right'}>
@@ -34,12 +35,12 @@ const MarkerDetail = () => {
           <Close />
         </IconButton>
         <br />
-        <ul className={style.markerDetailInfoContainer}>
+        <ul className={style.markerDetailInnerContainer}>
           <MarkerDetailInfo>
-            <Typography variant="body1" component="h2" sx={{ flexGrow: 1 }}>
+            <Typography variant="body1" component="h2" sx={{ flexGrow: 1, marginBottom: '1rem' }}>
               {name}
+              <Divider />
             </Typography>
-            <Divider />
           </MarkerDetailInfo>
           <MarkerDetailInfo primary="Latitude" secondary={lat} />
           <MarkerDetailInfo primary="Longitude" secondary={long} />
