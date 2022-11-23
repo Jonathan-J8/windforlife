@@ -1,5 +1,6 @@
-export { MarkerAction, MarkerProvider, useMarkerAction, useMarkerState } from './context';
+export { MarkerProvider, useMarkerAction, useMarkerState } from './context';
+import { Action } from './constants';
 import * as endpoints from './endpoints';
-import parse from './parse';
+import * as utils from './utils';
 
-export const marker = { ...endpoints, parse };
+export const marker = { endpoints, utils, actions: Action };

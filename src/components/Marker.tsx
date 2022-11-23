@@ -1,7 +1,7 @@
 import { Marker as MarkerLeafet, useMap } from 'react-leaflet';
 
 import useFetch from '../utils/useFetch';
-import { marker, useMarkerAction, MarkerAction } from '../stores/marker';
+import { marker, useMarkerAction } from '../stores/marker';
 
 // d: "M12 2 4.5 20.29l.71.71L12 18l6.79 3 .71-.71z"
 // icon={{ imagePath: '/navigation_FILL1_wght700_GRAD0_opsz48' }}
@@ -10,13 +10,13 @@ const Marker = ({ id, name, loc }: MarkerData) => {
   const map = useMap();
 
   const dispatch = useMarkerAction();
-  const { data, type, state } = useFetch(marker.getById(id));
+  const { data, type, state } = useFetch(marker.endpoints.getById(id));
 
   const onClick = () => {
     map.setView([loc.lat, loc.long]);
     if (state === 'fullfilled' && type === 'object') {
-      const marker = data as MarkerDetailData;
-      dispatch({ type: MarkerAction.ADD, payload: { show: true, current: marker } });
+      const current = data as MarkerDetailData;
+      dispatch({ type: marker.actions.ADD, payload: { show: true, current } });
     }
   };
 

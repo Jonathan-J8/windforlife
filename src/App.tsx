@@ -7,7 +7,7 @@ import Marker from './components/Marker';
 import MarkerDetail from './components/MarkerDetail';
 
 function App() {
-  const markers = useFetch(marker.getAll());
+  const markers = useFetch(marker.endpoints.getAll());
 
   return (
     <>

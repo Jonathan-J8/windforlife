@@ -1,4 +1,4 @@
-const parse = (obj?: MarkerDetailData) => ({
+export const parse = (obj?: MarkerDetailData) => ({
   id: obj?.id || 0,
   name: obj?.name || '',
   lat: `${obj?.loc?.lat}` || '',

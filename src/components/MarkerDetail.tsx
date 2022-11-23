@@ -2,7 +2,7 @@ import { Close } from '@mui/icons-material';
 import { Divider, IconButton, Paper, Slide, Typography } from '@mui/material';
 
 import isMobile from '../utils/isMobile';
-import { marker, useMarkerAction, useMarkerState, MarkerAction } from '../stores/marker';
+import { marker, useMarkerAction, useMarkerState } from '../stores/marker';
 
 import MarkerDetailInfo from './MarkerDetailInfo';
 import MarkerDetailReading from './MarkerDetailReading';
@@ -10,10 +10,10 @@ import style from './style.module.css';
 
 const MarkerDetail = () => {
   const { show, current } = useMarkerState();
-  const { id, name, lat, long, weeklyForce, dailyForce, readings } = marker.parse(current);
+  const { id, name, lat, long, weeklyForce, dailyForce, readings } = marker.utils.parse(current);
 
   const dispatch = useMarkerAction();
-  const onClose = () => dispatch({ type: MarkerAction.HIDE });
+  const onClose = () => dispatch({ type: marker.actions.HIDE });
 
   return (
     <Slide in={show} direction={isMobile() ? 'up' : 'right'}>
