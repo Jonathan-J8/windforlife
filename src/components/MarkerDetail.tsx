@@ -1,24 +1,16 @@
 import { Close } from '@mui/icons-material';
 import { Divider, IconButton, Paper, Slide, Typography } from '@mui/material';
-import { useMarkerAction, useMarkerState, MarkerAction } from '../stores/markerContext';
+
 import isMobile from '../utils/isMobile';
+import { marker, useMarkerAction, useMarkerState, MarkerAction } from '../stores/marker';
+
 import MarkerDetailInfo from './MarkerDetailInfo';
 import MarkerDetailReading from './MarkerDetailReading';
 import style from './style.module.css';
 
-const getDetailSafely = (obj?: MarkerDetailData) => ({
-  id: obj?.id || 0,
-  name: obj?.name || '',
-  lat: `${obj?.loc?.lat}` || '',
-  long: `${obj?.loc?.long}` || '',
-  weeklyForce: `${obj?.statistics?.average?.weekly?.force}` || '',
-  dailyForce: `${obj?.statistics?.average?.daily?.force}` || '',
-  readings: obj?.readings || [],
-});
-
 const MarkerDetail = () => {
-  const { show, anemometer } = useMarkerState();
-  const { id, name, lat, long, weeklyForce, dailyForce, readings } = getDetailSafely(anemometer);
+  const { show, current } = useMarkerState();
+  const { id, name, lat, long, weeklyForce, dailyForce, readings } = marker.parse(current);
 
   const dispatch = useMarkerAction();
   const onClose = () => dispatch({ type: MarkerAction.HIDE });

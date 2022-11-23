@@ -1,6 +1,5 @@
 import useFetch from './utils/useFetch';
-import { marker as endpoint } from './stores/apiEndpoints';
-import { MarkerProvider } from './stores/markerContext';
+import { marker, MarkerProvider } from './stores/marker';
 
 import Navbar from './components/Navbar';
 import Map from './components/Map';
@@ -8,7 +7,7 @@ import Marker from './components/Marker';
 import MarkerDetail from './components/MarkerDetail';
 
 function App() {
-  const markers = useFetch(endpoint.getAll());
+  const markers = useFetch(marker.getAll());
 
   return (
     <>

@@ -16,9 +16,7 @@ const MarkerDetailReading = ({ timestamp, force, dir }: MarkerReadingData) => {
   const img = useRef() as MutableRefObject<HTMLImageElement>;
 
   useEffect(() => {
-    if (img.current && img.current instanceof HTMLElement) {
-      img.current.style.transform = `rotate(${dir}deg)`;
-    }
+    img.current.style.transform = `rotate(${dir}deg)`;
   }, [dir]);
 
   const date = new Date(timestamp).toLocaleDateString();
