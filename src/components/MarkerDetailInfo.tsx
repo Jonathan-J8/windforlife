@@ -1,6 +1,15 @@
-import { Typography } from '@mui/material';
+import { Typography, Box } from '@mui/material';
 import { PropsWithChildren } from 'react';
-import style from './style.module.css';
+
+const css = {
+  li: {
+    display: 'inline-flex',
+    width: '100%',
+  },
+  grow: {
+    flexGrow: 1,
+  },
+};
 
 interface MarkerDetailInfoProps extends PropsWithChildren {
   primary?: string;
@@ -9,16 +18,16 @@ interface MarkerDetailInfoProps extends PropsWithChildren {
 
 const MarkerDetailInfo = ({ primary, secondary, children }: MarkerDetailInfoProps) => {
   return (
-    <li className={style.markerDetailInfo} tabIndex={0}>
+    <Box component="li" sx={{ ...css.li }} tabIndex={0}>
       {children || (
         <>
-          <Typography variant="body2" sx={{ flexGrow: 1 }}>
+          <Typography variant="body2" sx={{ ...css.grow }}>
             {primary}
           </Typography>
           <Typography variant="body2">{secondary}</Typography>
         </>
       )}
-    </li>
+    </Box>
   );
 };
 

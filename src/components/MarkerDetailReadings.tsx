@@ -20,7 +20,6 @@ interface Reading {
 
 const Reading = ({ timestamp, force, dir }: Reading) => {
   const img = useRef() as MutableRefObject<HTMLImageElement>;
-
   useEffect(() => {
     img.current.style.transform = `rotate(${dir.current}deg)`;
   }, [dir.current]);
@@ -29,19 +28,20 @@ const Reading = ({ timestamp, force, dir }: Reading) => {
   const alt = `Direction ${dir.current} degree`;
 
   return (
-    <Box component="li" sx={css.container}>
-      <Box component="span" sx={css.grow}>
-        <Typography variant="caption" sx={css.grow}>
+    <Box component="li" sx={{ ...css.container }}>
+      <Box component="span" sx={{ ...css.grow }}>
+        <Typography variant="caption" sx={{ ...css.grow }}>
           {date}
         </Typography>
         <Typography variant="body2">{force.current} kn</Typography>
       </Box>
+
       <Box
         ref={img}
         component="img"
-        sx={css.img}
+        sx={{ ...css.img }}
         width={25}
-        height={40}
+        height={35}
         alt={alt}
         src="/navigation_FILL1_wght700_GRAD0_opsz48.png"
         style={{ transform: `rotate(${dir.previous || 0}deg)` }}

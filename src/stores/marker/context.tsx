@@ -22,7 +22,7 @@ const reducer = (state: MarkerState, action: MarkerAction): MarkerState => {
     case Action.REMOVE:
       return {
         ...state,
-        default: true,
+        isDefault: true,
         prev: { ...state.current },
         current: { ...initialtMarker },
       };

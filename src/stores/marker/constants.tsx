@@ -11,7 +11,12 @@ export type MarkerAction =
   | { type: Action.SHOW }
   | { type: Action.HIDE };
 
-export type MarkerState = { show: boolean; default: boolean; prev: MarkerDetailData; current: MarkerDetailData };
+export type MarkerState = {
+  show: boolean;
+  isDefault: boolean;
+  prev: MarkerDetailData;
+  current: MarkerDetailData;
+};
 
 export const initialtMarker: MarkerDetailData = {
   id: 0,
@@ -31,7 +36,7 @@ export const initialtMarker: MarkerDetailData = {
 
 export const initialState: MarkerState = {
   show: false,
-  default: true,
+  isDefault: true,
   prev: { ...initialtMarker },
   current: {
     ...initialtMarker,
