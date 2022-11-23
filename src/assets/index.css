@@ -10,3 +10,29 @@ body {
   width: 100%;
   height: 100vh;
 }
+
+.react-leaflet-div-icon {
+  transform-origin: center bottom;
+  position: absolute;
+  bottom: 5px;
+  left: 50%;
+  transform: translate(-50%, 0%) rotate(var(--rotate, 0deg)) scale(1);
+  transition: transform 0.3s ease-in-out;
+}
+.react-leaflet-div-icon:hover {
+  transform: translate(-50%, 0%) rotate(var(--rotate, 0deg)) scale(1.1);
+}
+
+.react-leaflet-div-icon::before {
+  content: ' ';
+  position: absolute;
+  bottom: -10px;
+  left: 50%;
+  transform: translate(-50%, 0);
+  border-radius: 50%;
+  outline: 2px solid white;
+  width: 20px;
+  height: 20px;
+
+  background-color: black;
+}

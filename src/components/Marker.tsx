@@ -1,7 +1,9 @@
-import { Marker as MarkerLeafet, useMap } from 'react-leaflet';
+import { Marker as MarkerLeafet, Popup, useMap } from 'react-leaflet';
 
 import useFetch from '../utils/useFetch';
 import { marker, useMarkerAction } from '../stores/marker';
+import { DivIcon } from 'leaflet';
+import MarkerIcon from './MarkerIcon';
 
 // d: "M12 2 4.5 20.29l.71.71L12 18l6.79 3 .71-.71z"
 // icon={{ imagePath: '/navigation_FILL1_wght700_GRAD0_opsz48' }}
@@ -13,12 +15,21 @@ const Marker = ({ id, name, loc }: MarkerData) => {
   const { data, type, state } = useFetch(marker.endpoints.getById(id));
 
   const onClick = () => {
-    map.setView([loc.lat, loc.long]);
+    map.flyTo([loc.lat, loc.long]);
     if (state === 'fullfilled' && type === 'object') {
       const current = data as MarkerDetailData;
       dispatch({ type: marker.actions.ADD, payload: { show: true, current } });
     }
   };
+
+  const getLastDir = ({ readings }: MarkerDetailData) => {
+    const last = readings.length - 1;
+    const lastDir = readings[last].dir;
+    return lastDir;
+  };
+  console.log(data);
+
+  const lastDir = state === 'fullfilled' && type === 'object' ? getLastDir(data as MarkerDetailData) : 20;
 
   return (
     <>
@@ -27,11 +38,17 @@ const Marker = ({ id, name, loc }: MarkerData) => {
       </div> */}
       <MarkerLeafet
         position={[loc.lat, loc.long]}
+        riseOnHover={true}
+        icon={
+          new DivIcon({
+            html: `<div class="react-leaflet-div-icon" style="--rotate:${lastDir}deg" ><img src="/navigation_FILL1_wght700_GRAD0_opsz48.png" /></div>`,
+          })
+        }
         // icon={new DivIcon({ iconUrl: '/navigation_FILL1_wght700_GRAD0_opsz48.png', html: icon.current })}
         eventHandlers={{
           click: onClick,
         }}>
-        {/* <Popup>{label}</Popup> */}
+        <Popup>{name}</Popup>
       </MarkerLeafet>
     </>
   );
