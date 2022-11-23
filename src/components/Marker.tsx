@@ -1,5 +1,4 @@
-import { Navigation, Place } from '@mui/icons-material';
-import { Marker as MarkerLeafet, Popup } from 'react-leaflet';
+import { Marker as MarkerLeafet, Popup, useMap } from 'react-leaflet';
 
 import useFetch from '../utils/useFetch';
 import { anemometerById } from '../anemometer/api';
@@ -16,11 +15,15 @@ type MarkerProps = {
 // icon={{ imagePath: '/navigation_FILL1_wght700_GRAD0_opsz48' }}
 
 const Marker = ({ id, label, lat, long }: MarkerProps) => {
+  const map = useMap();
+
   const dispatch = useAnemometerAction();
   const res = useFetch(anemometerById(id));
 
-  console.log('anemo', id);
+  console.log(map);
+
   const onClick = () => {
+    map.setView([lat, long]);
     if (res.state === 'fullfilled' && res.type === 'object') {
       const anemometer = res.data as AnemometerDetail;
       dispatch({ type: AnemometerAction.ADD, payload: { show: true, anemometer } });
@@ -38,8 +41,7 @@ const Marker = ({ id, label, lat, long }: MarkerProps) => {
         eventHandlers={{
           click: onClick,
         }}>
-        <Popup>{label}</Popup>
-        <Navigation />
+        {/* <Popup>{label}</Popup> */}
       </MarkerLeafet>
     </>
   );

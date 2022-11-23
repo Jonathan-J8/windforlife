@@ -18,3 +18,27 @@
   transform: translate(-50%, -50%);
   transition: transform 0.4s ease-in-out;
 }
+.markerDetailDesktop {
+  left: 25px;
+  top: 60px;
+  width: clamp(200px, 85%, 340px);
+}
+.markerDetailMobile {
+  left: 10px;
+  bottom: 10px;
+  width: clamp(200px, 93%, 340px);
+}
+
+.markerDetailInfoContainer {
+  list-style-type: none;
+  margin-block-start: 0;
+  margin-block-end: 0;
+  margin-inline-start: 0;
+  margin-inline-end: 0;
+  padding-inline-start: 0;
+  padding: 0 1rem 1rem 1rem;
+}
+.markerDetailInfo {
+  display: inline-flex;
+  width: 100%;
+}
