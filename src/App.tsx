@@ -1,5 +1,5 @@
 import useFetch from './utils/useFetch';
-import { marker } from './stores/apiEndpoints';
+import { marker as endpoint } from './stores/apiEndpoints';
 import { MarkerProvider } from './stores/markerContext';
 
 import Navbar from './components/Navbar';
@@ -8,7 +8,7 @@ import Marker from './components/Marker';
 import MarkerDetail from './components/MarkerDetail';
 
 function App() {
-  const markers = useFetch(marker.getAll());
+  const markers = useFetch(endpoint.getAll());
 
   return (
     <>
@@ -16,7 +16,8 @@ function App() {
       <main>
         <MarkerProvider>
           <Map>
-            {markers.data?.length > 0 &&
+            {markers.state === 'fullfilled' &&
+              markers.data?.length > 0 &&
               markers.data.map((marker: MarkerData) => <Marker key={marker.id} {...marker} />)}
           </Map>
           <MarkerDetail />

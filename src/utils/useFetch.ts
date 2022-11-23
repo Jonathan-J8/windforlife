@@ -1,6 +1,7 @@
 import { useEffect, useState } from 'react';
-import typeOf from './typeOf';
+import isDev from './isDev';
 import wait from './wait';
+import typeOf from './typeOf';
 
 export type FetchResult = {
   data: any;
@@ -18,13 +19,17 @@ const useFetch = (url: string, options?: RequestInit | undefined): FetchResult =
     setResult({ ...defaultResult, state: 'pending' });
 
     (async () => {
-      await wait(500);
+      if (isDev) {
+        // simulate fetch pending state
+        const ms = Math.ceil(Math.random() * 500);
+        await wait(ms);
+      }
       try {
         const res = await fetch(url, { ...options, signal: controller.signal });
         const json = await res.json();
         setResult({ data: json, type: typeOf(json), state: 'fullfilled' });
-      } catch (error) {
-        setResult({ data: `${error}`, type: 'string', state: 'error' });
+      } catch (error: unknown) {
+        if (error?.name !== 'AbortError') setResult({ data: `${url}: ${error}`, type: 'string', state: 'error' });
       }
     })();
 
