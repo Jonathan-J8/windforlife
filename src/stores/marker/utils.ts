@@ -8,21 +8,20 @@ export const parse = (obj?: MarkerDetailData) => ({
   readings: obj?.readings || [],
 });
 
-export const getLastDir = (readings: MarkerReadingData[]) => {
+export const getLastDirection = (readings: MarkerReadingData[]) => {
+  if (readings.length === 0) return 0;
   const last = readings.length - 1;
   const lastDir = readings[last].dir;
   return lastDir;
 };
 
 interface MergedReadingsProps {
-  id: number;
   current: MarkerReadingData[];
   previous: MarkerReadingData[];
 }
-export const mergeReadings = ({ id, current, previous }: MergedReadingsProps) => {
+export const mergeReadings = ({ current, previous }: MergedReadingsProps) => {
   const mergedReadings = current.map((obj: MarkerReadingData, i: number) => {
     return {
-      id: id + obj.timestamp.toString(),
       timestamp: { current: obj.timestamp, previous: previous[i]?.timestamp || 0 },
       force: { current: obj.force, previous: previous[i]?.force || 0 },
       dir: { current: obj.dir, previous: previous[i]?.dir || 0 },
