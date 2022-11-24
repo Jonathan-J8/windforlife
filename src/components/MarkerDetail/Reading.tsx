@@ -4,7 +4,6 @@ import { Typography, Box } from '@mui/material';
 const css = {
   grow: { flexGrow: 1 },
   img: {
-    // paddingRight: '0.5rem',
     transformOrigin: 'center',
     transform: 'rotate(0deg)',
     transition: 'transform 0.5s ease-in-out 0.5s',

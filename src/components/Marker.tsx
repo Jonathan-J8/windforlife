@@ -1,10 +1,10 @@
 import { useMemo } from 'react';
-import { DivIcon as DivIconLeaflet } from 'leaflet';
+import { DivIcon as DivIconLeaflet, type Map as MapLeaflet } from 'leaflet';
 import { Marker as MarkerLeaflet, Popup as PopupLeaflet, useMap } from 'react-leaflet';
 
 import useFetch from '../utils/useFetch';
-import { marker, useMarkerAction } from '../stores/marker';
 import isMobile from '../utils/isMobile';
+import { marker, useMarkerAction } from '../stores/marker';
 
 const createIcon = (dir: number) => {
   return new DivIconLeaflet({
@@ -12,6 +12,21 @@ const createIcon = (dir: number) => {
               <img width="40" height="40" src="/navigation_FILL1_wght400_GRAD0_opsz40.png" alt="." />
            </div>`,
   });
+};
+
+const transposeCenter = (map: MapLeaflet) => {
+  // need to transpose Map latitude (y axis)
+  // to feet the Marker above MarkerDetail
+  // todo : get exact transposition
+
+  const zMax = map.getMaxZoom();
+  const z = map.getZoom();
+  const zRange = 1 - z / zMax;
+
+  const bounds = map.getBounds();
+  const mapMiddleY = (bounds.getNorth() - bounds.getSouth()) / 2;
+
+  return zRange + mapMiddleY / 2;
 };
 
 const Marker = ({ id, name, loc }: MarkerData) => {
@@ -24,15 +39,8 @@ const Marker = ({ id, name, loc }: MarkerData) => {
 
   const onOpen = () => {
     if (isMobile()) {
-      // need to transpose Map latitude (y axis)
-      // to feet the Marker above MarkerDetail
-      // todo : get exact transposition
-      const zMax = map.getMaxZoom();
-      const z = map.getZoom();
-      const range = 1 - z / zMax;
-      const bounds = map.getBounds();
-      const middleY = (bounds.getNorth() - bounds.getSouth()) / 2;
-      map.flyTo([loc.lat - middleY * range, loc.long]);
+      const trans = transposeCenter(map);
+      map.flyTo([loc.lat - trans, loc.long]);
     } else map.flyTo([loc.lat, loc.long]);
 
     if (state !== 'fullfilled') return;
@@ -43,12 +51,8 @@ const Marker = ({ id, name, loc }: MarkerData) => {
   const onClose = () => {
     if (!isMobile()) return;
     const coord = map.getCenter();
-    const zMax = map.getMaxZoom();
-    const z = map.getZoom();
-    const range = 1 - z / zMax;
-    const bounds = map.getBounds();
-    const middleY = (bounds.getNorth() - bounds.getSouth()) / 2;
-    map.flyTo([coord.lat + middleY * range, coord.lng]);
+    const trans = transposeCenter(map);
+    map.flyTo([coord.lat + trans, coord.lng]);
     dispatch({ type: marker.actions.HIDE });
   };
 
