@@ -1,10 +1,10 @@
 import MarkerDetailContainer from './MarkerDetailContainer';
-import MarkerDetailContent from './MarkerDetailContent';
+import MarkerDetailList from './MarkerDetailList';
 
 const MarkerDetail = () => {
   return (
     <MarkerDetailContainer>
-      <MarkerDetailContent />
+      <MarkerDetailList />
     </MarkerDetailContainer>
   );
 };

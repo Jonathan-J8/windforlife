@@ -1,9 +1,10 @@
 import { Divider, Typography } from '@mui/material';
-import { marker, useMarkerState } from '../stores/marker';
-
-import MarkerDetailInfo from './MarkerDetailInfo';
-import MarkerDetailReadings from './MarkerDetailReadings';
 import { Box } from '@mui/system';
+
+import { marker, useMarkerState } from '../../stores/marker';
+
+import MarkerDetailItem from './MarkerDetailItem';
+import MarkerDetailReadings from './MarkerDetailReadings';
 
 const css = {
   ul: {
@@ -23,7 +24,7 @@ const css = {
   },
 };
 
-const MarkerDetailContent = () => {
+const MarkerDetailList = () => {
   const { current, prev } = useMarkerState();
   const { id, name, lat, long, weeklyForce, dailyForce, readings } = marker.utils.parse(current);
   const { readings: prevReadings } = marker.utils.parse(prev);
@@ -31,26 +32,26 @@ const MarkerDetailContent = () => {
   return (
     <>
       <br />
-      <Box component="ul" sx={{ ...css.ul }}>
-        <MarkerDetailInfo>
-          <Typography variant="body1" component="h2" sx={{ ...css.title }}>
+      <Box sx={{ ...css.ul }} component="ul">
+        <MarkerDetailItem>
+          <Typography sx={{ ...css.title }} component="h2" variant="body1">
             {name}
           </Typography>
-        </MarkerDetailInfo>
+        </MarkerDetailItem>
         <li>
           <Divider />
         </li>
-        <MarkerDetailInfo primary="Latitude" secondary={lat} />
-        <MarkerDetailInfo primary="Longitude" secondary={long} />
-        <MarkerDetailInfo primary="Weekly average" secondary={`${weeklyForce} kn`} />
-        <MarkerDetailInfo primary="Daily average" secondary={`${dailyForce} kn`} />
+        <MarkerDetailItem primary="Latitude" secondary={lat} />
+        <MarkerDetailItem primary="Longitude" secondary={long} />
+        <MarkerDetailItem primary="Weekly average" secondary={`${weeklyForce} kn`} />
+        <MarkerDetailItem primary="Daily average" secondary={`${dailyForce} kn`} />
         <li>
           <Divider />
         </li>
-        <MarkerDetailReadings markerId={id} currentList={readings} previousList={prevReadings} />
+        <MarkerDetailReadings currentList={readings} markerId={id} previousList={prevReadings} />
       </Box>
     </>
   );
 };
 
-export default MarkerDetailContent;
+export default MarkerDetailList;

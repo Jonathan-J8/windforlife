@@ -1,5 +1,5 @@
+import type { PropsWithChildren } from 'react';
 import { Typography, Box } from '@mui/material';
-import { PropsWithChildren } from 'react';
 
 const css = {
   li: {
@@ -16,12 +16,12 @@ interface MarkerDetailInfoProps extends PropsWithChildren {
   secondary?: string;
 }
 
-const MarkerDetailInfo = ({ primary, secondary, children }: MarkerDetailInfoProps) => {
+const MarkerDetailItem = ({ primary, secondary, children }: MarkerDetailInfoProps) => {
   return (
     <Box component="li" sx={{ ...css.li }} tabIndex={0}>
       {children || (
         <>
-          <Typography variant="body2" sx={{ ...css.grow }}>
+          <Typography sx={{ ...css.grow }} variant="body2">
             {primary}
           </Typography>
           <Typography variant="body2">{secondary}</Typography>
@@ -31,4 +31,4 @@ const MarkerDetailInfo = ({ primary, secondary, children }: MarkerDetailInfoProp
   );
 };
 
-export default MarkerDetailInfo;
+export default MarkerDetailItem;

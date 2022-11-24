@@ -1,5 +1,5 @@
-import { Air } from '@mui/icons-material';
 import { AppBar, Button, Toolbar, Typography } from '@mui/material';
+import { Air } from '@mui/icons-material';
 
 const Navbar = () => {
   const navigate = () => (window.location.href = '/');
