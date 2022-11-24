@@ -1,7 +1,8 @@
-import type { PropsWithChildren } from 'react';
+import { PropsWithChildren, useState } from 'react';
 import { Paper, Slide } from '@mui/material';
 
 import isMobile from '../../utils/isMobile';
+import useWindowEvent from '../../utils/useWindowEvent';
 
 const css = {
   paper: {
@@ -28,10 +29,16 @@ interface Props extends PropsWithChildren {
 }
 
 const Modal = ({ open, children }: Props) => {
+  const [toggle, setToggle] = useState<boolean>(() => isMobile());
+
+  useWindowEvent('resize', () => {
+    setToggle(isMobile());
+  });
+
   return (
-    <Slide in={open} direction={isMobile() ? 'up' : 'right'}>
+    <Slide in={open} direction={toggle ? 'up' : 'right'}>
       <Paper
-        sx={{ ...css.paper, ...(isMobile() ? css.mobile : css.desktop) }}
+        sx={{ ...css.paper, ...(toggle ? css.mobile : css.desktop) }}
         aria-live="assertive"
         elevation={2}
         tabIndex={0}>
