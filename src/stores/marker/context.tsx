@@ -16,14 +16,15 @@ const reducer = (state: MarkerState, action: MarkerAction): MarkerState => {
     case Action.ADD:
       return {
         ...state,
-        prev: { ...state.current },
+        isDefault: false,
+        previous: { ...state.current },
         ...action.payload,
       };
     case Action.REMOVE:
       return {
         ...state,
         isDefault: true,
-        prev: { ...state.current },
+        previous: { ...state.current },
         current: { ...initialtMarker },
       };
     default:

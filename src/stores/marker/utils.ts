@@ -8,4 +8,25 @@ export const parse = (obj?: MarkerDetailData) => ({
   readings: obj?.readings || [],
 });
 
-export default parse;
+export const getLastDir = (readings: MarkerReadingData[]) => {
+  const last = readings.length - 1;
+  const lastDir = readings[last].dir;
+  return lastDir;
+};
+
+interface MergedReadingsProps {
+  id: number;
+  current: MarkerReadingData[];
+  previous: MarkerReadingData[];
+}
+export const mergeReadings = ({ id, current, previous }: MergedReadingsProps) => {
+  const mergedReadings = current.map((obj: MarkerReadingData, i: number) => {
+    return {
+      id: id + obj.timestamp.toString(),
+      timestamp: { current: obj.timestamp, previous: previous[i]?.timestamp || 0 },
+      force: { current: obj.force, previous: previous[i]?.force || 0 },
+      dir: { current: obj.dir, previous: previous[i]?.dir || 0 },
+    };
+  });
+  return mergedReadings;
+};

@@ -14,7 +14,7 @@ export type MarkerAction =
 export type MarkerState = {
   show: boolean;
   isDefault: boolean;
-  prev: MarkerDetailData;
+  previous: MarkerDetailData;
   current: MarkerDetailData;
 };
 
@@ -37,7 +37,7 @@ export const initialtMarker: MarkerDetailData = {
 export const initialState: MarkerState = {
   show: false,
   isDefault: true,
-  prev: { ...initialtMarker },
+  previous: { ...initialtMarker },
   current: {
     ...initialtMarker,
   },

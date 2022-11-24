@@ -13,18 +13,12 @@ const createIcon = (dir: number) => {
   });
 };
 
-const getLastDir = ({ readings }: MarkerDetailData) => {
-  const last = readings.length - 1;
-  const lastDir = readings[last].dir;
-  return lastDir;
-};
-
 const Marker = ({ id, name, loc }: MarkerData) => {
   const map = useMap();
   const dispatch = useMarkerAction();
   const { data, state } = useFetch(marker.endpoints.getById(id));
 
-  const lastDir = state === 'fullfilled' ? getLastDir(data as MarkerDetailData) : 0;
+  const lastDir = state === 'fullfilled' ? marker.utils.getLastDir(data.readings as MarkerReadingData[]) : 0;
   const icon = useMemo(() => createIcon(lastDir), [lastDir]);
 
   const onClick = () => {

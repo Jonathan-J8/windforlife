@@ -6,7 +6,7 @@ import { marker, MarkerProvider } from './stores/marker';
 import Navbar from './components/Navbar';
 import Map from './components/Map';
 import Marker from './components/Marker';
-import MarkerDetail from './components/markerDetail/MarkerDetail';
+import MarkerDetail from './components/MarkerDetail';
 
 function App() {
   const { data } = useFetch(marker.endpoints.getAll());
