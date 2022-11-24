@@ -20,7 +20,7 @@ export type MarkerState = {
 
 export const initialtMarker: MarkerDetailData = {
   id: 0,
-  name: '',
+  name: 'not found',
   loc: {
     lat: 0,
     long: 0,

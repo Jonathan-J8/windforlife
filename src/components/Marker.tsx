@@ -17,9 +17,10 @@ const createIcon = (dir: number) => {
 const Marker = ({ id, name, loc }: MarkerData) => {
   const map = useMap();
   const dispatch = useMarkerAction();
-  const { data, state } = useFetch(marker.endpoints.getById(id));
+  const { data, state } = useFetch<MarkerDetailData>(marker.endpoints.getById(id), marker.utils.getDefaultData());
 
-  const lastDir = state === 'fullfilled' ? marker.utils.getLastDirection(data.readings as MarkerReadingData[]) : 0;
+  // cosnt b = useState()
+  const lastDir = state === 'fullfilled' ? marker.utils.getLastDirection(data.readings) : 0;
   const icon = useMemo(() => createIcon(lastDir), [lastDir]);
 
   const onClick = () => {

@@ -9,7 +9,7 @@ import Marker from './components/Marker';
 import MarkerDetail from './components/MarkerDetail';
 
 function App() {
-  const { data } = useFetch(marker.endpoints.getAll());
+  const { data, state } = useFetch<MarkerData[]>(marker.endpoints.getAll(), []);
 
   return (
     <>
@@ -17,7 +17,9 @@ function App() {
       <Navbar />
       <main>
         <MarkerProvider>
-          <Map>{Array.isArray(data) && data.map((marker: MarkerData) => <Marker key={marker.id} {...marker} />)}</Map>
+          <Map>
+            {state === 'fullfilled' && data.map((marker: MarkerData) => <Marker key={marker.id} {...marker} />)}
+          </Map>
           <MarkerDetail />
         </MarkerProvider>
       </main>

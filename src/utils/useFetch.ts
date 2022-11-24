@@ -1,35 +1,37 @@
 import { useEffect, useState } from 'react';
 import isDev from './isDev';
 import wait from './wait';
-import typeOf from './typeOf';
+// import typeOf from './typeOf';
 
-export type FetchResult = {
-  data: unknown;
-  type: string;
+export type FetchResult<T> = {
+  data: T;
   state: 'idle' | 'pending' | 'fullfilled' | 'error';
 };
 
-const defaultResult: FetchResult = { data: undefined, type: 'undefined', state: 'idle' };
+// const def = { data: undefined, type: 'undefined', state: 'idle' };
 
-const useFetch = (url: string, options?: RequestInit | undefined): FetchResult => {
-  const [result, setResult] = useState<FetchResult>({ ...defaultResult });
+function useFetch<T>(url: string, data: T, options?: RequestInit | undefined): FetchResult<T> {
+  // const [data, setData] = useState<T>();
+  const [result, setResult] = useState<FetchResult<T>>(() => ({ state: 'idle', data }));
 
   useEffect(() => {
     const controller = new AbortController();
-    setResult({ ...defaultResult, state: 'pending' });
+    setResult({ state: 'pending', data });
 
     (async () => {
+      // simulate fetch pending state
       if (isDev) {
-        // simulate fetch pending state
-        const ms = Math.ceil(Math.random() * 500);
+        const ms = Math.ceil(Math.random() * 1000);
         await wait(ms);
       }
       try {
         const res = await fetch(url, { ...options, signal: controller.signal });
         const json = await res.json();
-        setResult({ data: json, type: typeOf(json), state: 'fullfilled' });
+        setResult({ data: json, state: 'fullfilled' });
       } catch (error: unknown) {
-        if (error?.name !== 'AbortError') setResult({ data: `${url}: ${error}`, type: 'string', state: 'error' });
+        if (error instanceof Error && error.name !== 'AbortError') {
+          setResult({ data, state: 'error' });
+        }
       }
     })();
 
@@ -37,6 +39,6 @@ const useFetch = (url: string, options?: RequestInit | undefined): FetchResult =
   }, [url, options]);
 
   return result;
-};
+}
 
 export default useFetch;

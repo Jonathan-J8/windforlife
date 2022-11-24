@@ -1,3 +1,5 @@
+import { initialtMarker } from './constants';
+
 export const parse = (obj?: MarkerDetailData) => ({
   id: obj?.id || 0,
   name: obj?.name || '',
@@ -29,3 +31,5 @@ export const mergeReadings = ({ current, previous }: MergedReadingsProps) => {
   });
   return mergedReadings;
 };
+
+export const getDefaultData = () => ({ ...initialtMarker });
