@@ -9,7 +9,7 @@ import isMobile from '../utils/isMobile';
 const createIcon = (dir: number) => {
   return new DivIconLeaflet({
     html: `<div class="react-leaflet-div-icon" style="--rotate:${dir}deg" >
-              <img src="/navigation_FILL1_wght700_GRAD0_opsz48.png" alt="." />
+              <img width="40" height="40" src="/navigation_FILL1_wght400_GRAD0_opsz40.png" alt="." />
            </div>`,
   });
 };

@@ -4,7 +4,7 @@ import { Typography, Box } from '@mui/material';
 const css = {
   grow: { flexGrow: 1 },
   img: {
-    paddingRight: '0.5rem',
+    // paddingRight: '0.5rem',
     transformOrigin: 'center',
     transform: 'rotate(0deg)',
     transition: 'transform 0.5s ease-in-out 0.5s',
@@ -24,7 +24,7 @@ const Reading = ({ timestamp, force, dir }: ItemProps) => {
     img.current.style.transform = `rotate(${dir.current}deg)`;
   }, [dir.current]);
 
-  const date = new Date(timestamp.current).toLocaleDateString();
+  const date = new Date(timestamp.current).toLocaleString();
   const alt = `Direction ${dir.current} degree`;
 
   return (
@@ -39,10 +39,10 @@ const Reading = ({ timestamp, force, dir }: ItemProps) => {
         sx={{ ...css.img }}
         style={{ transform: `rotate(${dir.previous || 0}deg)` }}
         component="img"
-        src="/navigation_FILL1_wght700_GRAD0_opsz48.png"
+        src="/north_FILL1_wght400_GRAD0_opsz40.png"
         alt={alt}
         width={25}
-        height={35}
+        height={25}
       />
     </>
   );

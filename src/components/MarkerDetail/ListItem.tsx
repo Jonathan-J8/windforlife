@@ -4,6 +4,7 @@ import { Typography, Box } from '@mui/material';
 const css = {
   li: {
     display: 'inline-flex',
+    alignItems: 'center',
     width: '100%',
   },
   grow: {
