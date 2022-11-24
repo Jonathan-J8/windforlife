@@ -1,5 +1,6 @@
 import { Typography, IconButton, Box } from '@mui/material';
 import { ExpandLess, ExpandMore } from '@mui/icons-material';
+import isMobile from '../../utils/isMobile';
 
 const css = {
   container: {
@@ -31,6 +32,9 @@ interface Props {
   onExpand: () => void;
 }
 
+const IconMobile = ({ expand }: { expand: boolean }) => (expand ? <ExpandMore /> : <ExpandLess />);
+const IconDesktop = ({ expand }: { expand: boolean }) => (expand ? <ExpandLess /> : <ExpandMore />);
+
 const Header = ({ title, expand, direction, onExpand }: Props) => {
   return (
     <Box
@@ -58,8 +62,8 @@ const Header = ({ title, expand, direction, onExpand }: Props) => {
         title="close marker detail"
         color="primary"
         size="small">
-        {expand ? <ExpandLess /> : <ExpandMore />}
-        {/* {isMobile() ? <IconMobile expand={expand} /> : <IconDesktop expand={expand} />} */}
+        {/* {expand ? <ExpandLess /> : <ExpandMore />} */}
+        {isMobile() ? <IconMobile expand={expand} /> : <IconDesktop expand={expand} />}
       </IconButton>
     </Box>
   );
