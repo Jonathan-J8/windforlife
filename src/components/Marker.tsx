@@ -4,6 +4,7 @@ import { Marker as MarkerLeaflet, Popup as PopupLeaflet, useMap } from 'react-le
 
 import useFetch from '../utils/useFetch';
 import { marker, useMarkerAction } from '../stores/marker';
+import isMobile from '../utils/isMobile';
 
 const createIcon = (dir: number) => {
   return new DivIconLeaflet({
@@ -22,7 +23,18 @@ const Marker = ({ id, name, loc }: MarkerData) => {
   const icon = useMemo(() => createIcon(lastDir), [lastDir]);
 
   const onClick = () => {
-    map.flyTo([loc.lat, loc.long]);
+    if (isMobile()) {
+      // need to transpose Map latitude (y axis)
+      // to feet the Marker above MarkerDetail
+      // todo : get exact transposition
+      const zMax = map.getMaxZoom();
+      const z = map.getZoom();
+      const range = 1 - z / zMax;
+      const bounds = map.getBounds();
+      const middleY = (bounds.getNorth() - bounds.getSouth()) / 2;
+      map.flyTo([loc.lat - middleY * range, loc.long]);
+    } else map.flyTo([loc.lat, loc.long]);
+
     if (state !== 'fullfilled') return;
     const current = data as MarkerDetailData;
     dispatch({ type: marker.actions.ADD, payload: { show: true, current } });

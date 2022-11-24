@@ -14,8 +14,7 @@ const MarkerDetail = () => {
   const { id, name, lat, long, weeklyForce, dailyForce, readings } = marker.utils.parse(current);
   const { readings: prevReadings } = marker.utils.parse(previous);
   const readingsMerged = marker.utils.mergeReadings({ current: readings, previous: prevReadings });
-  const last = readingsMerged.length - 1;
-  const directionMerged = last > 0 ? readingsMerged[last].dir : { current: 0, previous: 0 };
+  const direction = marker.utils.getLastDirection(readings);
 
   const onExpand = () => {
     if (show) {
@@ -27,7 +26,7 @@ const MarkerDetail = () => {
 
   return (
     <Modal open={!isDefault}>
-      <Header title={name} expand={show} direction={directionMerged} onExpand={onExpand} />
+      <Header title={name} expand={show} direction={direction} onExpand={onExpand} />
       <Collapse in={show} orientation="vertical">
         <List>
           <ListItem>

@@ -1,9 +1,6 @@
 import { memo, type PropsWithChildren } from 'react';
 import { MapContainer, TileLayer, type MapContainerProps } from 'react-leaflet';
 
-// import type { LeafletMouseEvent, Map as LeafletMap } from 'leaflet';
-// import useRefWithCallback from '../utils/useRefWithCallback';
-
 interface MapProps extends MapContainerProps, PropsWithChildren {}
 
 const Map = ({
@@ -14,24 +11,8 @@ const Map = ({
   zoomControl = false,
   ...rest
 }: MapProps) => {
-  // for debugging
-  // const setRef = useRefWithCallback((map: LeafletMap | undefined) => {
-  //   const onCLick = (e: LeafletMouseEvent) => {
-  //     const map = e.target;
-  //   };
-  //   if (map) map.on('click', onCLick);
-  //   return () => {
-  //     if (map) map.off('click', onCLick);
-  //   };
-  // });
   return (
-    <MapContainer
-      // ref={setRef}
-      center={center}
-      zoom={zoom}
-      scrollWheelZoom={scrollWheelZoom}
-      zoomControl={zoomControl}
-      {...rest}>
+    <MapContainer center={center} zoom={zoom} scrollWheelZoom={scrollWheelZoom} zoomControl={zoomControl} {...rest}>
       <TileLayer
         attribution='&copy; <a href="https://www.openstreetmap.org/copyright">OpenStreetMap</a> contributors'
         url="https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png"
@@ -40,4 +21,6 @@ const Map = ({
     </MapContainer>
   );
 };
+
+//
 export default memo(Map);

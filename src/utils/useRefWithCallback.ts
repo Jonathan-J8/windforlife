@@ -1,14 +1,14 @@
 import { useCallback, useRef } from 'react';
 
 type Unmount = () => void;
-type Mount = (node: unknown) => Unmount;
+type Mount = (value: unknown) => Unmount;
 
 const useRefWithCallback = (onMount: Mount) => {
   const ref = useRef<unknown>(undefined);
-  const callback = useRef<Unmount | undefined>(undefined);
+  const callback = useRef<Unmount>();
 
   const setRef = useCallback(
-    (node: unknown) => {
+    (value: unknown) => {
       // execute the unmount method if any
       if (typeof callback.current === 'function') callback.current();
 
@@ -17,7 +17,7 @@ const useRefWithCallback = (onMount: Mount) => {
       if (ref.current) ref.current = undefined;
 
       // start with fresh values
-      ref.current = node;
+      ref.current = value;
       if (ref.current) callback.current = onMount(ref.current);
     },
     // reset each time the component mount

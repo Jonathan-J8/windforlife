@@ -1,0 +1,15 @@
+.direction {
+  position: absolute;
+  width: 150px;
+  height: 150px;
+  filter: blur(10px);
+  left: 55%;
+  top: 50%;
+  transform-origin: left top;
+  border-radius: 50%;
+  background: linear-gradient(120deg, #1876d2, white);
+  /* background-color: rgba(255, 255, 255, 0.8); */
+  /* outline: solid red 3px; */
+  opacity: 0.5;
+  transition: transform 0.5s ease;
+}
