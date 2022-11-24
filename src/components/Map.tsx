@@ -22,5 +22,4 @@ const Map = ({
   );
 };
 
-//
 export default memo(Map);
