@@ -38,7 +38,5 @@ export const initialState: MarkerState = {
   show: false,
   isDefault: true,
   previous: { ...initialtMarker },
-  current: {
-    ...initialtMarker,
-  },
+  current: { ...initialtMarker },
 };

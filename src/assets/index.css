@@ -19,6 +19,7 @@ body {
   transform: translate(-50%, 0%) rotate(var(--rotate, 0deg)) scale(1);
   transition: transform 0.3s ease-in-out;
 }
+
 .react-leaflet-div-icon:hover {
   transform: translate(-50%, 0%) rotate(var(--rotate, 0deg)) scale(1.1);
 }
@@ -47,6 +48,7 @@ body {
   white-space: nowrap;
   border-width: 0;
 }
+
 .not-sr-only {
   position: static;
   width: auto;
@@ -56,13 +58,4 @@ body {
   overflow: visible;
   clip: auto;
   white-space: normal;
-}
-
-@keyframes gradient {
-  0% {
-    background-position: 100% 50%;
-  }
-  100% {
-    background-position: 0% 100%;
-  }
 }

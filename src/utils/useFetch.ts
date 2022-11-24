@@ -1,17 +1,13 @@
 import { useEffect, useState } from 'react';
 import isDev from './isDev';
 import wait from './wait';
-// import typeOf from './typeOf';
 
 export type FetchResult<T> = {
   data: T;
   state: 'idle' | 'pending' | 'fullfilled' | 'error';
 };
 
-// const def = { data: undefined, type: 'undefined', state: 'idle' };
-
 function useFetch<T>(url: string, data: T, options?: RequestInit | undefined): FetchResult<T> {
-  // const [data, setData] = useState<T>();
   const [result, setResult] = useState<FetchResult<T>>(() => ({ state: 'idle', data }));
 
   useEffect(() => {

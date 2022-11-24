@@ -1,5 +1,6 @@
 import { Typography, IconButton, Box } from '@mui/material';
 import { ExpandLess, ExpandMore } from '@mui/icons-material';
+
 import isMobile from '../../utils/isMobile';
 
 const css = {
@@ -62,7 +63,6 @@ const Header = ({ title, expand, direction, onExpand }: Props) => {
         title="close marker detail"
         color="primary"
         size="small">
-        {/* {expand ? <ExpandLess /> : <ExpandMore />} */}
         {isMobile() ? <IconMobile expand={expand} /> : <IconDesktop expand={expand} />}
       </IconButton>
     </Box>

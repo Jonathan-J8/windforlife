@@ -36,5 +36,7 @@ The demo is just a couple hours away... Never shy for a fun challenge, you quick
 - [x] Deliver a good user experience
 - [x] Make the app responsive
 - [x] Don't forget accessibility
+- [x] Add relevant animations
 - [x] Use Typescript
 - [x] Use Leaflet
+- [x] Use a linter
