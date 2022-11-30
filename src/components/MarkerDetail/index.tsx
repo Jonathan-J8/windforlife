@@ -14,7 +14,7 @@ const MarkerDetail = () => {
   const { id, name, lat, long, weeklyForce, dailyForce, readings } = marker.utils.parse(current);
   const { readings: prevReadings } = marker.utils.parse(previous);
   const readingsMerged = marker.utils.mergeReadings({ current: readings, previous: prevReadings });
-  const direction = marker.utils.getLastDirection(readings);
+  const direction = marker.utils.getReadingsLastDirectionByDate(readings);
 
   const onExpand = () => {
     if (show) {

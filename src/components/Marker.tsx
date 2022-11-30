@@ -34,7 +34,7 @@ const Marker = ({ id, name, loc }: MarkerData) => {
   const dispatch = useMarkerAction();
   const { data, state } = useFetch<MarkerDetailData>(marker.endpoints.getById(id), marker.utils.getDefaultData());
 
-  const lastDir = state === 'fullfilled' ? marker.utils.getLastDirection(data.readings) : 0;
+  const lastDir = state === 'fullfilled' ? marker.utils.getReadingsLastDirectionByDate(data.readings) : 0;
   const icon = useMemo(() => createIcon(lastDir), [lastDir]);
 
   const onOpen = () => {

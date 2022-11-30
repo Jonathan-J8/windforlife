@@ -10,10 +10,17 @@ export const parse = (obj?: MarkerDetailData) => ({
   readings: obj?.readings || [],
 });
 
-export const getLastDirection = (readings: MarkerReadingData[]) => {
-  if (readings.length === 0) return 0;
-  const last = readings.length - 1;
-  const lastDir = readings[last].dir;
+export const getReadingsLastDirectionByDate = (readings: MarkerReadingData[]) => {
+  let lastDate = 0;
+  let lastDir = 0;
+  for (let i = 0, len = readings.length; i < len; ++i) {
+    const item = readings[i];
+    const date = new Date(item.timestamp).getTime();
+    if (date > lastDate) {
+      lastDate = date;
+      lastDir = item.dir;
+    }
+  }
   return lastDir;
 };
 
