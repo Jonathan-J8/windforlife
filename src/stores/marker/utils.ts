@@ -32,4 +32,11 @@ export const mergeReadings = ({ current, previous }: MergedReadingsProps) => {
   return mergedReadings;
 };
 
+export const sortReadingsByDate = (list: MarkerReadingData[]) => {
+  const listSorted = [...list].sort((a, b) => {
+    return new Date(a.timestamp).getTime() - new Date(b.timestamp).getTime();
+  });
+  return listSorted;
+};
+
 export const getDefaultData = () => ({ ...initialtMarker });

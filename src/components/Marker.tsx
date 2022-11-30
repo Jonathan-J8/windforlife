@@ -45,6 +45,7 @@ const Marker = ({ id, name, loc }: MarkerData) => {
 
     if (state !== 'fullfilled') return;
     const current = data as MarkerDetailData;
+    current.readings = marker.utils.sortReadingsByDate(current.readings);
     dispatch({ type: marker.actions.ADD, payload: { show: true, current } });
   };
 
