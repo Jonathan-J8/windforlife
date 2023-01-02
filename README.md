@@ -1,6 +1,7 @@
 # Windforlife
 
-React + Leaflet demo app about wind map (./public/Screenshot.png)
+React + Leaflet demo app about wind map  
+![Screenshot](./public/Screenshot.png)
 
 ## Scripts
 
